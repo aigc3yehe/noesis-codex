@@ -1,0 +1,23 @@
+{
+  "name": "noesis-codex-plugin",
+  "version": "0.1.1",
+  "private": true,
+  "type": "module",
+  "description": "Independent NFT-authenticated NOESIS research client for Codex",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "npm run build && node --test tests/*.test.mjs",
+    "start": "node dist/server.cjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.30.1",
+    "zod": "3.25.76",
+    "zod-to-json-schema": "3.25.2"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2"
+  }
+}

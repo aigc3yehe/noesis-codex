@@ -1,0 +1,14 @@
+node_modules/
+release/
+.DS_Store
+.env
+.env.*
+!.env.example
+*.log
+*.pem
+*.key
+*.p12
+*.sqlite
+*.db
+.auth/
+.local/

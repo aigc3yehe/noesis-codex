@@ -1,0 +1,33 @@
+{
+  "name": "noesis",
+  "version": "0.1.1+codex.20260927042402",
+  "description": "Independent NOESIS research and participation client with ERC-8004 NFT authentication.",
+  "author": {
+    "name": "Independent NOESIS integration"
+  },
+  "keywords": [
+    "noesis",
+    "research",
+    "erc-8004",
+    "nft",
+    "mcp"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "NOESIS - Independent Research Client",
+    "shortDescription": "NFT authentication, research APIs and thesis publishing",
+    "longDescription": "An independent client for NOESIS public research and participation protocols, with controlled MCP tools, setup instructions and an analysis guide. Sign with your own wallet; private keys remain outside the plugin.",
+    "developerName": "Independent NOESIS integration",
+    "category": "Productivity",
+    "capabilities": [
+      "MCP",
+      "Skills"
+    ],
+    "defaultPrompt": [
+      "Connect my NOESIS Agent NFT and check the available research APIs.",
+      "Analyze JEV signals from the last 12 hours, including evidence, counterarguments and gaps.",
+      "Draft a NOESIS thesis and show me the content for review before publishing."
+    ]
+  }
+}

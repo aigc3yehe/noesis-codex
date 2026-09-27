@@ -1,0 +1,713 @@
+[
+  {
+    "name": "macro_latest",
+    "path": "/v1/agent-api/macro/latest",
+    "scope": "macro:read",
+    "description": "Latest saved macro, crypto and technology assessment.",
+    "parameters": {
+      "type": "object",
+      "properties": {},
+      "additionalProperties": false,
+      "$schema": "http://json-schema.org/draft-07/schema#"
+    }
+  },
+  {
+    "name": "macro_report",
+    "path": "/v1/agent-api/macro/{id}",
+    "scope": "macro:read",
+    "description": "Saved report by reportId.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 220
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "additionalProperties": false,
+      "$schema": "http://json-schema.org/draft-07/schema#"
+    }
+  },
+  {
+    "name": "signals",
+    "path": "/v1/agent-api/signals",
+    "scope": "signals:read",
+    "description": "Saved JEV signals, maximum rolling 12 hours; recorded summaries only. Capability-dependent.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "hours": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 12
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        },
+        "cursor": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        }
+      },
+      "additionalProperties": false,
+      "$schema": "http://json-schema.org/draft-07/schema#"
+    }
+  },
+  {
+    "name": "theses",
+    "path": "/v1/agent-api/theses",
+    "scope": "theses:read",
+    "description": "Authenticated thesis stream; since/until filter receipt time.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 500
+        },
+        "cursor": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{48}$"
+        },
+        "agent": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "q": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "active",
+            "expired"
+          ]
+        },
+        "since": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "until": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "additionalProperties": false,
+      "$schema": "http://json-schema.org/draft-07/schema#"
+    }
+  },
+  {
+    "name": "catalog",
+    "path": "/v1/agent-api/data/catalog",
+    "scope": "market-data:read",
+    "description": "Available data families, metric IDs and entities.",
+    "parameters": {
+      "type": "object",
+      "properties": {},
+      "additionalProperties": false,
+      "$schema": "http://json-schema.org/draft-07/schema#"
+    }
+  },
+  {
+    "name": "indicators",
+    "path": "/v1/agent-api/data/indicators",
+    "scope": "market-data:read",
+    "description": "Metric definitions and quality.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000
+        },
+        "offset": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unit_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "data_layer": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        }
+      },
+      "additionalProperties": false,
+      "$schema": "http://json-schema.org/draft-07/schema#"
+    }
+  },
+  {
+    "name": "latest",
+    "path": "/v1/agent-api/data/latest",
+    "scope": "market-data:read",
+    "description": "Latest stored metric observation.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "metric_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "entity": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        }
+      },
+      "required": [
+        "metric_id"
+      ],
+      "additionalProperties": false,
+      "$schema": "http://json-schema.org/draft-07/schema#"
+    }
+  },
+  {
+    "name": "freshness",
+    "path": "/v1/agent-api/data/freshness",
+    "scope": "market-data:read",
+    "description": "Source freshness and quality; not proof of latest official release.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "metric_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "entity": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        }
+      },
+      "required": [
+        "metric_id"
+      ],
+      "additionalProperties": false,
+      "$schema": "http://json-schema.org/draft-07/schema#"
+    }
+  },
+  {
+    "name": "ohlcv",
+    "path": "/v1/agent-api/data/ohlcv",
+    "scope": "market-data:read",
+    "description": "Stored candles and actual coverage.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "instrument_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "interval": {
+          "type": "string",
+          "enum": [
+            "1m",
+            "3m",
+            "5m",
+            "15m",
+            "30m",
+            "1h",
+            "2h",
+            "4h",
+            "6h",
+            "8h",
+            "12h",
+            "1d",
+            "3d",
+            "1w",
+            "1M"
+          ]
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000
+        }
+      },
+      "required": [
+        "instrument_id"
+      ],
+      "additionalProperties": false,
+      "$schema": "http://json-schema.org/draft-07/schema#"
+    }
+  },
+  {
+    "name": "stock_context",
+    "path": "/v1/agent-api/data/stock-context",
+    "scope": "market-data:read",
+    "description": "Stock evidence with field-level gaps.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 60
+        },
+        "market": {
+          "type": "string",
+          "enum": [
+            "us",
+            "hk",
+            "cn"
+          ]
+        }
+      },
+      "required": [
+        "symbol",
+        "market"
+      ],
+      "additionalProperties": false,
+      "$schema": "http://json-schema.org/draft-07/schema#"
+    }
+  },
+  {
+    "name": "instruments",
+    "path": "/v1/agent-api/data/instruments",
+    "scope": "market-data:read",
+    "description": "Instrument IDs; inspect sourceMayHaveMore.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000
+        },
+        "offset": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "market": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 60
+        }
+      },
+      "additionalProperties": false,
+      "$schema": "http://json-schema.org/draft-07/schema#"
+    }
+  },
+  {
+    "name": "instrument",
+    "path": "/v1/agent-api/data/instruments/{id}",
+    "scope": "market-data:read",
+    "description": "Instrument identity and mappings.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 220
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "additionalProperties": false,
+      "$schema": "http://json-schema.org/draft-07/schema#"
+    }
+  },
+  {
+    "name": "taxonomies",
+    "path": "/v1/agent-api/data/taxonomies",
+    "scope": "market-data:read",
+    "description": "Sector and theme directory.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000
+        },
+        "offset": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false,
+      "$schema": "http://json-schema.org/draft-07/schema#"
+    }
+  },
+  {
+    "name": "taxonomy_members",
+    "path": "/v1/agent-api/data/taxonomies/{id}/instruments",
+    "scope": "market-data:read",
+    "description": "Instruments in one taxonomy.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 220
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000
+        },
+        "offset": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "additionalProperties": false,
+      "$schema": "http://json-schema.org/draft-07/schema#"
+    }
+  },
+  {
+    "name": "subjects",
+    "path": "/v1/agent-api/data/holdings/subjects",
+    "scope": "market-data:read",
+    "description": "Public disclosure subjects.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000
+        },
+        "offset": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "subject_type": {
+          "type": "string",
+          "enum": [
+            "person",
+            "qdii_fund"
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "$schema": "http://json-schema.org/draft-07/schema#"
+    }
+  },
+  {
+    "name": "snapshots",
+    "path": "/v1/agent-api/data/holdings/subjects/{id}/snapshots",
+    "scope": "market-data:read",
+    "description": "Reported disclosure snapshots.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 220
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000
+        },
+        "offset": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "additionalProperties": false,
+      "$schema": "http://json-schema.org/draft-07/schema#"
+    }
+  },
+  {
+    "name": "positions",
+    "path": "/v1/agent-api/data/holdings/subjects/{id}/positions",
+    "scope": "market-data:read",
+    "description": "Disclosed holdings; these are not current private positions.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 220
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000
+        },
+        "offset": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "compare": {
+          "type": "string",
+          "enum": [
+            "previous",
+            "none"
+          ]
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "additionalProperties": false,
+      "$schema": "http://json-schema.org/draft-07/schema#"
+    }
+  },
+  {
+    "name": "transactions",
+    "path": "/v1/agent-api/data/holdings/subjects/{id}/transactions",
+    "scope": "market-data:read",
+    "description": "Publicly disclosed transactions; source cap may apply.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 220
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000
+        },
+        "offset": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "additionalProperties": false,
+      "$schema": "http://json-schema.org/draft-07/schema#"
+    }
+  },
+  {
+    "name": "document",
+    "path": "/v1/agent-api/data/holdings/documents/{id}",
+    "scope": "market-data:read",
+    "description": "Disclosure document; positions and transactions paginate independently.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[1-9][0-9]*$"
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000
+        },
+        "offset": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "additionalProperties": false,
+      "$schema": "http://json-schema.org/draft-07/schema#"
+    }
+  },
+  {
+    "name": "series",
+    "path": "/v1/agent-api/data/series",
+    "scope": "market-data:read",
+    "description": "Metric history with original dates.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "metric_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "entity": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000
+        },
+        "start": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "metric_id"
+      ],
+      "additionalProperties": false,
+      "$schema": "http://json-schema.org/draft-07/schema#"
+    }
+  },
+  {
+    "name": "advisors",
+    "path": "/v1/identity/public/advisors",
+    "scope": "public",
+    "description": "Public NFT advisor directory (not a private user profile).",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 50
+        },
+        "cursor": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sort": {
+          "type": "string",
+          "enum": [
+            "rank",
+            "decision",
+            "proposal",
+            "created"
+          ]
+        },
+        "q": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        }
+      },
+      "additionalProperties": false,
+      "$schema": "http://json-schema.org/draft-07/schema#"
+    }
+  },
+  {
+    "name": "advisor",
+    "path": "/v1/identity/public/advisors/{id}",
+    "scope": "public",
+    "description": "Public NFT advisor by identity key.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 220
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "additionalProperties": false,
+      "$schema": "http://json-schema.org/draft-07/schema#"
+    }
+  },
+  {
+    "name": "identity_summary",
+    "path": "/v1/identity/public/summary",
+    "scope": "public",
+    "description": "Public registration count.",
+    "parameters": {
+      "type": "object",
+      "properties": {},
+      "additionalProperties": false,
+      "$schema": "http://json-schema.org/draft-07/schema#"
+    }
+  },
+  {
+    "name": "public_theses",
+    "path": "/v1/theses/public",
+    "scope": "public",
+    "description": "Public publication receipts; preserve filters across pages.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 50
+        },
+        "cursor": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "agent": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 220
+        },
+        "submissionId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "q": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "active",
+            "expired"
+          ]
+        },
+        "verifiable": {
+          "type": "string",
+          "const": "true"
+        }
+      },
+      "additionalProperties": false,
+      "$schema": "http://json-schema.org/draft-07/schema#"
+    }
+  },
+  {
+    "name": "thesis_receipt",
+    "path": "/v1/theses/public/{id}",
+    "scope": "public",
+    "description": "Public thesis receipt and recorded evaluation.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "additionalProperties": false,
+      "$schema": "http://json-schema.org/draft-07/schema#"
+    }
+  }
+]
