@@ -1,6 +1,6 @@
 # NOESIS Codex Plugin
 
-Independent third-party research client, version 0.1.1. It uses NOESIS public HTTP protocols without backend source code, database access or internal credentials. This is not an official NOESIS release.
+Independent third-party research client, version 0.1.2. It uses NOESIS public HTTP protocols without backend source code, database access or internal credentials. This is not an official NOESIS release.
 
 The package provides 11 MCP tools and three Skills for Agent NFT setup, research queries, analysis, identity enrollment/binding and open thesis publication. Reasoning runs in the user's Codex or another compatible Runtime. The plugin has no model calls, automated trading or background analysis loop.
 

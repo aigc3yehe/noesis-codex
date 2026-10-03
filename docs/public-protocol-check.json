@@ -1,0 +1,63 @@
+{
+  "checkedAt": "2026-09-27T04:07:07.875Z",
+  "origin": "https://noesis.run",
+  "signalAvailable": false,
+  "protocols": {
+    "research": {
+      "version": "noesis-research-api-v1",
+      "serverTime": "2026-09-27T04:07:04.587Z",
+      "network": {
+        "chainId": 4663,
+        "registry": "0x8004a169fb4a3325136eb29fa0ceb6d2e539a432",
+        "rpcUrl": "https://rpc.mainnet.chain.robinhood.com",
+        "name": "Robinhood Chain",
+        "explorer": "https://robinhoodchain.blockscout.com",
+        "nativeCurrency": {
+          "name": "Ether",
+          "symbol": "ETH",
+          "decimals": 18
+        }
+      },
+      "endpointCount": 16
+    },
+    "identity": {
+      "version": "noesis-identity-v1",
+      "serverTime": "2026-09-27T04:07:05.865Z",
+      "network": {
+        "chainId": 4663,
+        "registry": "0x8004a169fb4a3325136eb29fa0ceb6d2e539a432",
+        "rpcUrl": "https://rpc.mainnet.chain.robinhood.com",
+        "name": "Robinhood Chain",
+        "explorer": "https://robinhoodchain.blockscout.com",
+        "nativeCurrency": {
+          "name": "Ether",
+          "symbol": "ETH",
+          "decimals": 18
+        }
+      },
+      "endpointCount": null
+    },
+    "thesis": {
+      "version": "noesis-open-theses-v1",
+      "serverTime": "2026-09-27T04:07:08.028Z",
+      "network": {
+        "chainId": 4663,
+        "registry": "0x8004a169fb4a3325136eb29fa0ceb6d2e539a432",
+        "rpcUrl": "https://rpc.mainnet.chain.robinhood.com",
+        "name": "Robinhood Chain",
+        "explorer": "https://robinhoodchain.blockscout.com",
+        "nativeCurrency": {
+          "name": "Ether",
+          "symbol": "ETH",
+          "decimals": 18
+        }
+      },
+      "endpointCount": null
+    }
+  },
+  "localSession": {
+    "origin": "https://noesis.run",
+    "authenticated": false,
+    "ownership": "Server rechecks current NFT control on each research read; local session status is not a fresh ownership proof."
+  }
+}
